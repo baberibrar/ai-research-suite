@@ -1,18 +1,13 @@
-from dotenv import load_dotenv
 import os
-
-# Load environment variables from .env file
-load_dotenv()
-
-# Access your API keys
-openai_api_key = os.getenv("OPENAI_API_KEY")
-# anthropic_api_key = os.getenv("ANTHROPIC_API_KEY")
-groq_api_key = os.getenv("GROQ_API_KEY")
-
 import aisuite as ai
 client = ai.Client()
 
-models = ["groq:grok-beta"]
+
+os.environ['GROQ_API_KEY'] = "gsk..."
+os.environ['OPENAI_API_KEY']="sk.."
+
+
+models = ["openai:gpt-4o", "groq:llama3-groq-8b-8192-tool-use-preview"]
 
 messages = [
     {"role": "system", "content": "Respond in Pirate English."},
@@ -26,4 +21,3 @@ for model in models:
         temperature=0.75
     )
     print(response.choices[0].message.content)
-
